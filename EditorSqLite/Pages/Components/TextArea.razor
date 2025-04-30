@@ -1,0 +1,16 @@
+﻿@namespace EditorSqLite.Pages.Components
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<textarea class="form-control" id="exampleFormControlTextarea1"></textarea>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Appeler une fonction JavaScript pour initialiser le textarea
+            await JSRuntime.InvokeVoidAsync("initializeTextArea", "exampleFormControlTextarea1");
+        }
+    }
+}

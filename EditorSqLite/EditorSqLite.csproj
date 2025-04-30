@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\static\app.css" />
+    <None Include="wwwroot\static\lib\bootstrap\bootstrap.min.css" />
+    <None Include="wwwroot\static\lib\bootstrap\bootstrap.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+       <PackageReference Include="Microsoft.AspNetCore.Components.WebView.WindowsForms" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Database\Database.csproj" />
+  </ItemGroup>
+
+</Project>
