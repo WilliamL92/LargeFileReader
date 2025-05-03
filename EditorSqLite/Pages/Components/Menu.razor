@@ -1,4 +1,5 @@
-﻿@namespace EditorSqLite.Pages.Components
+﻿@using EditorSqLite.Pages.Components
+@namespace EditorSqLite.Pages.Components
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="menuBar">
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -8,8 +9,8 @@
                     File
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#">Open</a></li>
-                    <li><a class="dropdown-item" href="#">Save</a></li>
+                    <li><a class="dropdown-item" @onclick="SaveFile">Open</a></li>
+                    <li><a class="dropdown-item">Save</a></li>
                 </ul>
             </li>
         </ul>

@@ -26,19 +26,25 @@
     width: 20px;
 }
 
-#scrollBarArea {
-    height: calc(100vh - 40px);
+#scrollBarAreaY {
+    height: calc(100vh - 60px);
     background-color: #f1f1f1;
     width: 20px;
 }
 
+#scrollBarAreaX {
+    width: calc(100vw - 20px);
+    background-color: #f1f1f1;
+    height: 20px;
+}
+
 textarea {
-    height: calc(100vh - 40px);
+    height: calc(100vh - 60px);
     resize: none;
     overflow-y: hidden;
-    overflow-x: auto;
+    overflow-x: hidden;
     white-space: nowrap;
-    width: 100%;
+    width: calc(100vw - 40px);
     border-radius: 0px !important;
     background-color: #373737 !important;
     border-color: #373737 !important;

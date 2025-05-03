@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorSqLite", "EditorSqLit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{BEC4DCE4-56C4-44D4-933C-4C41699BD6A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{D90FE3FC-AE47-43EC-9F10-F56CF6FEA96E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BEC4DCE4-56C4-44D4-933C-4C41699BD6A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEC4DCE4-56C4-44D4-933C-4C41699BD6A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEC4DCE4-56C4-44D4-933C-4C41699BD6A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D90FE3FC-AE47-43EC-9F10-F56CF6FEA96E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D90FE3FC-AE47-43EC-9F10-F56CF6FEA96E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D90FE3FC-AE47-43EC-9F10-F56CF6FEA96E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D90FE3FC-AE47-43EC-9F10-F56CF6FEA96E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,16 +6,23 @@
             <Menu></Menu>
         </div>
         <div class="row">
-            <!-- Première colonne avec une largeur fixe de 20px -->
-            <div class="col-auto">
+            <div class="col">
                 <LineNumber></LineNumber>
             </div>
-            <!-- Deuxième colonne qui remplit le reste de l'espace -->
             <div class="col">
-                <TextArea></TextArea>
-            </div>
-            <div class="col-auto">
-                <ScrollBar></ScrollBar>
+                <div class="row">
+                    <div class="col">
+                        <TextArea></TextArea>
+                    </div>
+                    <div class="col-auto">
+                        <ScrollBarY></ScrollBarY>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <ScrollBarX></ScrollBarX>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
