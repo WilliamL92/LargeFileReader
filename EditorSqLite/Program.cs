@@ -2,7 +2,7 @@ using System;
 using System.Windows.Forms;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Database.Models;
+using BLL.Models;
 using Microsoft.AspNetCore.Components.WebView.WindowsForms;
 
 namespace EditorSqLite

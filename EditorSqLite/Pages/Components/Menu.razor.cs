@@ -1,7 +1,8 @@
-﻿using Database.Models;
+﻿using BLL.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Database;
 using BLL;
 
 namespace EditorSqLite.Pages.Components
@@ -19,52 +20,47 @@ namespace EditorSqLite.Pages.Components
             if(dlg is null)
                 return;
 
-            string filePath = dlg.FileName;
-            FileInfo info = new FileInfo(filePath);
-
             using var scope = ScopeFactory.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<LargeFileReaderDbContext>();
 
-            var fileEnt = await db.Files.FirstOrDefaultAsync(f => f.Path == filePath);
+            FileEntity? fileEnt = await db.Files.FirstOrDefaultAsync(f => f.Path == dlg.FileName);
 
-            if (fileEnt is null)
-            {
-                fileEnt = new FileEntity
-                {
-                    Name = Path.GetFileName(filePath),
-                    Path = filePath
-                };
-                db.Files.Add(fileEnt);
-            }
-            else
-            {
-                db.Lines.RemoveRange(db.Lines.Where(l => l.IdFile == fileEnt.Id));
-            }
+            FileInfo info = new FileInfo(dlg.FileName);
 
-            fileEnt.Size = info.Length;
-            fileEnt.LastModified = info.LastWriteTime;
+            int resultFileRemoved = -1;
 
-            await db.SaveChangesAsync();
+            if (fileEnt is not null)
+                resultFileRemoved = await DbCRUD.RemoveFileByPathAsync(dlg.FileName, db);
+
+            fileEnt = await DbCRUD.CreateNewFileAsync(Path.GetFileName(dlg.FileName), dlg.FileName, info.Length, info.LastWriteTime, db);
 
             using var stream = info.OpenText();
             char[] buffer = new char[100];
             int read;
             int position = 0;
-            var toInsert = new List<LineEntity>();
+            const int batchSize = 1000; // Taille du lot
+            List<LineEntity> batch = new List<LineEntity>();
 
             while ((read = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
             {
-                var text = new string(buffer, 0, read);
-                toInsert.Add(new LineEntity
+                string text = new string(buffer, 0, read);
+                batch.Add(new LineEntity
                 {
                     IdFile = fileEnt.Id,
                     Text = text,
                     Position = position++
                 });
+
+                if (batch.Count >= batchSize)
+                {
+                    await DbCRUD.CreateNewLinesAsync(batch, db);
+                    batch.Clear(); // Videz le lot pour le prochain groupe
+                }
             }
 
-            db.Lines.AddRange(toInsert);
-            await db.SaveChangesAsync();
+            // Insérez les lignes restantes
+            if (batch.Count > 0)
+                await DbCRUD.CreateNewLinesAsync(batch, db);
         }
     }
 }

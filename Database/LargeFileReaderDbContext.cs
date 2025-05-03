@@ -1,5 +1,5 @@
 ﻿using System.Reflection.Emit;
-using Database.Models;
+using BLL.Models;
 using Microsoft.EntityFrameworkCore;
 
 public class LargeFileReaderDbContext : DbContext
@@ -15,6 +15,11 @@ public class LargeFileReaderDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder model)
     {
+        model.Entity<LineEntity>()
+            .HasOne(l => l.FileEntity)
+            .WithMany(f => f.Lines)
+            .HasForeignKey(l => l.IdFile)
+            .OnDelete(DeleteBehavior.Cascade);
         base.OnModelCreating(model);
     }
 }
